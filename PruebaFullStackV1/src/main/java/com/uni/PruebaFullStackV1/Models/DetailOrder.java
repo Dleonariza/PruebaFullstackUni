@@ -1,6 +1,7 @@
 package com.uni.PruebaFullStackV1.Models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "detail_orders")
+@Table(name = "details_orders")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,7 +20,9 @@ public class DetailOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
+    @NotBlank(message = "Quantity must not go empty")
     private Integer quantity;
 
     @ManyToMany

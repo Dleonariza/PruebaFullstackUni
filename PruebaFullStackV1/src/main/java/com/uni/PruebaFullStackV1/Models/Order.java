@@ -15,12 +15,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "num_order")
     private String numOrder;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
