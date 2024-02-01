@@ -25,13 +25,9 @@ public class DetailOrder {
     @NotBlank(message = "Quantity must not go empty")
     private Integer quantity;
 
-    @ManyToMany
-    @JoinTable(
-            name = "details_orders_products",
-            joinColumns = @JoinColumn(name = "detail_order_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Product> products = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     @ManyToOne
     @JoinColumn(name = "order_id")

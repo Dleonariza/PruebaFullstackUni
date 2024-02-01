@@ -24,7 +24,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity userEntity;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<DetailOrder> detailsOrders;

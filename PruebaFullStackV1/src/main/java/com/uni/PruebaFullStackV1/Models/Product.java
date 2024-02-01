@@ -26,6 +26,7 @@ public class Product {
     @Column(unique = true, nullable = false, length = 8)
     @Size(max = 8)
     @NotBlank
+    //Autogenerado
     private String code;
 
     @Column(length = 20, nullable = false)
@@ -40,7 +41,4 @@ public class Product {
     @Column(nullable = false)
     @NotBlank(message = "Type must not go empty")
     private String type;
-
-    @ManyToMany(mappedBy = "products")
-    private List<DetailOrder> detailsOrders = new ArrayList<>();
 }
