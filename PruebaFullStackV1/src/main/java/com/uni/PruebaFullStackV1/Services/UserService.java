@@ -35,8 +35,6 @@ public class UserService implements IUser {
         actuallyUserEntity.setEmail(email);
         String address = userEntity.getAddress();
         actuallyUserEntity.setAddress(address);
-        Date birth = userEntity.getBirth();
-        actuallyUserEntity.setBirth(birth);
         return userRepository.save(actuallyUserEntity);
     }
 

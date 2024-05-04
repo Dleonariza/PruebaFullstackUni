@@ -42,7 +42,7 @@ public class UserEntity {
 
     @Column(nullable = false, unique = true)
     @NotBlank(message = "Email must not go empty")
-    @Email
+    @Email(message = "Mail is not formatted correctly.")
     private String email;
 
     @Column(nullable = false)
@@ -52,11 +52,6 @@ public class UserEntity {
     @Column(nullable = false)
     @NotBlank
     private String address;
-
-    @Column(nullable = false)
-    @NotBlank(message = "")
-    @Past(message = "Birthday date must be lower")
-    private Date birth = new Date();
 
     @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();

@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -35,7 +33,6 @@ public class Product {
     private String name;
 
     @Column(nullable = false)
-    @NotBlank(message = "Price must not go empty")
     private BigDecimal price;
 
     @Column(nullable = false)
