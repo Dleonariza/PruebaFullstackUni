@@ -47,4 +47,9 @@ public class ProductService implements IProduct {
         productRepository.deleteById(id);
         return "Deleted product";
     }
+
+    @Override
+    public boolean findProductByCode(String code) {
+        return productRepository.existsProductByCode(code);
+    }
 }
