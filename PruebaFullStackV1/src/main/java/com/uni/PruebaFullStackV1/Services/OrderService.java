@@ -7,7 +7,9 @@ import com.uni.PruebaFullStackV1.Services.InterfacesImplements.IOrder;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -17,6 +19,15 @@ public class OrderService implements IOrder {
 
     @Override
     public Order createOrder(Order order) {
+        Optional<String> lastNumOrder = orderRepository.findMaxNumOrder();
+        if (lastNumOrder.isPresent()){
+            String lastOrderNumber = lastNumOrder.get();
+            int numericPart = Integer.parseInt(lastOrderNumber.substring(1));
+            int nextNumericPart = numericPart + 1;
+            order.setNumOrder(String.format("O%07d", nextNumericPart));
+        } else {
+            order.setNumOrder("O0000001");
+        }
         return orderRepository.save(order);
     }
 
