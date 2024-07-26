@@ -11,5 +11,4 @@ public interface IOrder {
     public Order findOrderById(Long id);
     public List<Order> allOrders();
     public String deletedOrder(Long id);
-
 }
