@@ -1,5 +1,6 @@
 package com.uni.PruebaFullStackV1.Models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -52,6 +53,7 @@ public class UserEntity {
     @NotBlank
     private String address;
 
-    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Order> orders;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("user_userOrders")
+    private List<UserOrder> userOrders;
 }

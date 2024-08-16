@@ -1,7 +1,9 @@
 package com.uni.PruebaFullStackV1.Controllers;
 
 import com.uni.PruebaFullStackV1.Models.Product;
+import com.uni.PruebaFullStackV1.Models.UserEntity;
 import com.uni.PruebaFullStackV1.Services.ProductService;
+import com.uni.PruebaFullStackV1.Services.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -35,7 +37,7 @@ public class ProductController {
     }
 
     @GetMapping("/getProductByID")
-    public Product findProductById(@RequestParam("id") Long id){
+    public Product findProductById(@RequestParam(name = "id") Long id){
         return productService.findProductById(id);
     }
 

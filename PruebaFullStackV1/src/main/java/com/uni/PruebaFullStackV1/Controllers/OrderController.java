@@ -5,6 +5,7 @@ import com.uni.PruebaFullStackV1.Models.Order;
 import com.uni.PruebaFullStackV1.Services.OrderService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +28,12 @@ public class OrderController {
     }
 
     @GetMapping("/findById")
-    public Order findOrderById(@RequestParam("id") Long id){
-        return orderService.findOrderById(id);
+    public ResponseEntity<Order> findOrderById(@RequestParam("id") Long id){
+        try{
+            return new ResponseEntity<>(orderService.findOrderById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
     }
 
     @GetMapping("/allOrders")
@@ -36,6 +41,14 @@ public class OrderController {
         return orderService.allOrders();
     }
 
+    @GetMapping("/findByNumOrder")
+    public ResponseEntity<?> findByNumOrder(@RequestParam("numOrder") String numOrder) {
+        try {
+            return ResponseEntity.ok(orderService.findOrderByNumOrder(numOrder));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteOrder(@RequestParam("id") Long id){
         return ResponseEntity.ok(orderService.deletedOrder(id));

@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query(value = "SELECT MAX(o.numOrder) FROM Order o")
     public Optional<String> findMaxNumOrder();
+
+    public Order findOrderByNumOrder (String numOrder);
 }

@@ -4,6 +4,7 @@ import com.uni.PruebaFullStackV1.Models.UserEntity;
 import com.uni.PruebaFullStackV1.Repositories.UserRepository;
 import com.uni.PruebaFullStackV1.Services.InterfacesImplements.IUser;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -12,8 +13,8 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class UserService implements IUser {
-
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public UserEntity createUser(UserEntity userEntity) {

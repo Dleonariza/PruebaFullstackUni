@@ -1,7 +1,9 @@
 package com.uni.PruebaFullStackV1.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,14 +24,15 @@ public class DetailOrder {
     private Long id;
 
     @Column(nullable = false)
-    @NotBlank(message = "Quantity must not go empty")
+    @NotNull
     private Integer quantity;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
+    @JsonBackReference("detailsOrders_order")
     private Order order;
 }

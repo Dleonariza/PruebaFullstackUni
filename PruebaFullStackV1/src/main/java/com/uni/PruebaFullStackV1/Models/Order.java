@@ -1,5 +1,6 @@
 package com.uni.PruebaFullStackV1.Models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.uni.PruebaFullStackV1.Repositories.OrderRepository;
 import com.uni.PruebaFullStackV1.Services.OrderService;
 import jakarta.persistence.*;
@@ -27,12 +28,11 @@ public class Order {
     @Size(max = 8)
     private String numOrder;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity userEntity;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("order_userOrders")
+    private List<UserOrder> userOrders;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference("detailsOrders_order")
     private List<DetailOrder> detailsOrders;
-
-
 }
