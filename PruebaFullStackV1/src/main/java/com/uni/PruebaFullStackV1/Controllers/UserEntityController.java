@@ -1,5 +1,6 @@
 package com.uni.PruebaFullStackV1.Controllers;
 
+import com.uni.PruebaFullStackV1.Models.Order;
 import com.uni.PruebaFullStackV1.Models.UserEntity;
 import com.uni.PruebaFullStackV1.Services.UserService;
 import jakarta.validation.Valid;
@@ -41,6 +42,11 @@ public class UserEntityController {
     @GetMapping("/allUsers")
     public List<UserEntity> allUsers(){
         return userService.allUsers();
+    }
+
+    @GetMapping("/ordersOfUser")
+    public List<Order> ordersOfUser(@RequestParam(name = "id") Long id){
+        return  userService.ordersOfUser(id);
     }
 
     @DeleteMapping("/deleteUser")
