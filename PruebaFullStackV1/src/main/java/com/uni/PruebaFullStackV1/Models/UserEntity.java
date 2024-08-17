@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Table(name = "users")
@@ -53,7 +55,14 @@ public class UserEntity {
     @NotBlank
     private String address;
 
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("user_userOrders")
     private List<UserOrder> userOrders;
+
 }

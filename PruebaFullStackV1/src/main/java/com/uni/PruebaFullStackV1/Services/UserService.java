@@ -4,7 +4,6 @@ import com.uni.PruebaFullStackV1.Models.Order;
 import com.uni.PruebaFullStackV1.Models.UserEntity;
 import com.uni.PruebaFullStackV1.Models.UserOrder;
 import com.uni.PruebaFullStackV1.Repositories.OrderRepository;
-import com.uni.PruebaFullStackV1.Repositories.UserOrderRepository;
 import com.uni.PruebaFullStackV1.Repositories.UserRepository;
 import com.uni.PruebaFullStackV1.Services.InterfacesImplements.IUser;
 import lombok.AllArgsConstructor;
@@ -12,8 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,6 +27,7 @@ public class UserService implements IUser {
 
     @Override
     public UserEntity createUser(UserEntity userEntity) {
+        userEntity.setCreatedAt(LocalDateTime.now());
         return userRepository.save(userEntity);
     }
 
@@ -45,6 +46,7 @@ public class UserService implements IUser {
         actuallyUserEntity.setEmail(email);
         String address = userEntity.getAddress();
         actuallyUserEntity.setAddress(address);
+        actuallyUserEntity.setUpdatedAt(LocalDateTime.now());
         return userRepository.save(actuallyUserEntity);
     }
 
