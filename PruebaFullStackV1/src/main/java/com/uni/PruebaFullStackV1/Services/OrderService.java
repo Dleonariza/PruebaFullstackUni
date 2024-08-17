@@ -8,6 +8,7 @@ import com.uni.PruebaFullStackV1.Services.InterfacesImplements.IOrder;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -46,6 +47,7 @@ public class OrderService implements IOrder {
                     .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
             userOrder.setUser(user);
         }
+        order.setCreatedAt(LocalDateTime.now());
         return orderRepository.save(order);
     }
 
@@ -53,6 +55,7 @@ public class OrderService implements IOrder {
     public Order updateOrder(Long id, List<DetailOrder> detailOrders) {
         Order actuallyOrder = findOrderById(id);
         actuallyOrder.setDetailsOrders(detailOrders);
+        actuallyOrder.setUpdatedAt(LocalDateTime.now());
         return orderRepository.save(actuallyOrder);
     }
 

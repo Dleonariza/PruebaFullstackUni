@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -17,6 +18,7 @@ public class ProductService implements IProduct {
 
     @Override
     public Product createProduct(Product product) {
+        product.setCreated_at(LocalDateTime.now());
         return productRepository.save(product);
     }
 
@@ -29,6 +31,7 @@ public class ProductService implements IProduct {
         actuallyProduct.setPrice(price);
         String type = product.getType();
         actuallyProduct.setType(type);
+        actuallyProduct.setUpdated_at(LocalDateTime.now());
         return productRepository.save(actuallyProduct);
     }
 

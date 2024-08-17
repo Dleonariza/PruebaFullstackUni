@@ -11,6 +11,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -47,4 +48,10 @@ public class Product {
     @Column(nullable = false)
     @NotBlank(message = "Type must not go empty")
     private String type;
+
+    @Column(name = "created_at")
+    private LocalDateTime created_at;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updated_at;
 }
