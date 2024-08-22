@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Table(name = "users")
@@ -61,8 +60,17 @@ public class UserEntity {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @Enumerated(EnumType.STRING)
+    private ERole rol;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("user_userOrders")
     private List<UserOrder> userOrders;
 
+    @PrePersist
+    protected void onCreate() {
+        if (rol == null) {
+            this.rol = ERole.USER;
+        }
+    }
 }

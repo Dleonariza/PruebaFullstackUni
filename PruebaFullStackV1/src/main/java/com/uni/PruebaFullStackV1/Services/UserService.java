@@ -1,8 +1,6 @@
 package com.uni.PruebaFullStackV1.Services;
 
-import com.uni.PruebaFullStackV1.Models.Order;
-import com.uni.PruebaFullStackV1.Models.UserEntity;
-import com.uni.PruebaFullStackV1.Models.UserOrder;
+import com.uni.PruebaFullStackV1.Models.*;
 import com.uni.PruebaFullStackV1.Repositories.OrderRepository;
 import com.uni.PruebaFullStackV1.Repositories.UserRepository;
 import com.uni.PruebaFullStackV1.Services.InterfacesImplements.IUser;
@@ -14,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
