@@ -1,21 +1,20 @@
 package com.uni.PruebaFullStackV1.Models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.uni.PruebaFullStackV1.Models.RolesAndPermissions.RoleEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Table(name = "users")
 @Entity
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserEntity {
@@ -46,6 +45,9 @@ public class UserEntity {
     @Email(message = "Mail is not formatted correctly.")
     private String email;
 
+    @Column(nullable = false, unique = true)
+    private String username;
+
     @Column(nullable = false)
     @NotBlank(message = "Password must not go empty")
     private String password;
@@ -60,17 +62,25 @@ public class UserEntity {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Enumerated(EnumType.STRING)
-    private ERole rol;
+    @Column(name = "is_enabled")
+    private Boolean isEnabled;
+
+    @Column(name = "account_non_expired")
+    private boolean accountNonExpired;
+
+    @Column(name = "account_non_locked")
+    private boolean accountNonLocked;
+
+    @Column(name = "credentials_non_expired")
+    private boolean credentialsNonExpired;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("user_userOrders")
     private List<UserOrder> userOrders;
 
-    @PrePersist
-    protected void onCreate() {
-        if (rol == null) {
-            this.rol = ERole.USER;
-        }
-    }
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_roles",
+                joinColumns = @JoinColumn(name = "user_id"),
+                inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<RoleEntity> roles;
 }

@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,10 +16,12 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/product")
+@PreAuthorize("denyAll()")
 public class ProductController {
     private final ProductService productService;
 
     @PostMapping("/create")
+    @PreAuthorize("hasAnyRole('ADMIN', 'DEVELOPER')")
     public ResponseEntity<?> createProduct(@Valid @RequestBody Product product){
         try {
             if (!productService.findProductByCode(product.getCode())){
@@ -32,21 +35,25 @@ public class ProductController {
     }
 
     @PutMapping("/update")
+    @PreAuthorize("hasAnyRole('ADMIN', 'DEVELOPER')")
     public Product updateProduct(@RequestParam("id") Long id, Product product){
         return productService.updateProduct(id,product);
     }
 
     @GetMapping("/getProductByID")
+    @PreAuthorize("permitAll()")
     public Product findProductById(@RequestParam(name = "id") Long id){
         return productService.findProductById(id);
     }
 
     @GetMapping("/allProducts")
+    @PreAuthorize("permitAll()")
     public List<Product> allProducts(){
         return productService.allProducts();
     }
 
     @DeleteMapping("/delete")
+    @PreAuthorize("hasAnyRole('ADMIN', 'DEVELOPER')")
     public ResponseEntity<String> deleteProduct(@RequestParam("id") Long id){
         return ResponseEntity.ok(productService.deletedProduct(id));
     }
