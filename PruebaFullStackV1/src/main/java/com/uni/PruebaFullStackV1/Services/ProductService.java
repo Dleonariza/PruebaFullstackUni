@@ -55,4 +55,24 @@ public class ProductService implements IProduct {
     public boolean findProductByCode(String code) {
         return productRepository.existsProductByCode(code);
     }
+
+    @Override
+    public List<Product> findProductsByName(String productName) {
+        return productRepository.findProductsByName(productName);
+    }
+
+    @Override
+    public List<Product> findProductByNameContaining(String productName) {
+        return productRepository.findProductByNameContaining(productName);
+    }
+
+    @Override
+    public List<Product> findProductsByCategory(String category) {
+        return productRepository.findProductsByType(category);
+    }
+
+    @Override
+    public List<String> findAllCategories() {
+        return productRepository.allTypes();
+    }
 }

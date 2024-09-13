@@ -10,6 +10,9 @@ public interface IProduct {
     public Product findProductById(Long id);
     public List<Product> allProducts();
     public String deletedProduct(Long id);
-
     public boolean findProductByCode(String code);
+    public List<Product> findProductsByName(String productName);
+    public List<Product> findProductByNameContaining(String productName);
+    public List<Product> findProductsByCategory(String category);
+    public List<String> findAllCategories();
 }

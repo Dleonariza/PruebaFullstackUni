@@ -41,7 +41,7 @@ public class ProductController {
     }
 
     @GetMapping("/getProductByID")
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public Product findProductById(@RequestParam(name = "id") Long id){
         return productService.findProductById(id);
     }
@@ -52,6 +52,29 @@ public class ProductController {
         return productService.allProducts();
     }
 
+    @GetMapping("/getProductByName")
+    @PreAuthorize("permitAll()")
+    public List<Product> getProductsByName(@RequestParam(name = "name") String name){
+        return productService.findProductsByName(name);
+    }
+
+    @GetMapping("/getProductsByNameContaining")
+    @PreAuthorize("permitAll()")
+    public ResponseEntity<List<Product>> getProductsByNameContaining(@RequestParam(name = "name") String name){
+        return new ResponseEntity<>(productService.findProductByNameContaining(name), HttpStatus.FOUND);
+    }
+
+    @GetMapping("/getProductsByType")
+    @PreAuthorize("permitAll()")
+    public List<Product> getProductsByType(@RequestParam(name = "type") String type){
+        return productService.findProductsByCategory(type);
+    }
+
+    @GetMapping("/getAllTypes")
+    @PreAuthorize("permitAll()")
+    public List<String> getAllTypes(){
+        return productService.findAllCategories();
+    }
     @DeleteMapping("/delete")
     @PreAuthorize("hasAnyRole('ADMIN', 'DEVELOPER')")
     public ResponseEntity<String> deleteProduct(@RequestParam("id") Long id){
