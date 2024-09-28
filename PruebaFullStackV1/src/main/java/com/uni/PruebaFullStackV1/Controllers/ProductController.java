@@ -17,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/api/product")
 @PreAuthorize("denyAll()")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ProductController {
     private final ProductService productService;
 
