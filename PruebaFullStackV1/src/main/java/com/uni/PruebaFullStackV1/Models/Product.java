@@ -2,7 +2,9 @@ package com.uni.PruebaFullStackV1.Models;
 
 import com.uni.PruebaFullStackV1.Repositories.ProductRepository;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -48,6 +50,19 @@ public class Product {
     @Column(nullable = false)
     @NotBlank(message = "Type must not go empty")
     private String type;
+
+    @Column(nullable = false)
+    @NotBlank(message = "Description must not go empty")
+    private String description;
+
+    @Column(nullable = false)
+    @NotBlank(message = "Image must not go empty")
+    private String image;
+
+    @Column(nullable = false)
+    @Min(0)
+    @Positive
+    private Integer available;
 
     @Column(name = "created_at")
     private LocalDateTime created_at;
