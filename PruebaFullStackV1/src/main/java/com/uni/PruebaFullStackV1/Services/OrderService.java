@@ -39,6 +39,12 @@ public class OrderService implements IOrder {
             Product product = productRepository.findById(productId)
                     .orElseThrow(() -> new RuntimeException("Product not found with id: " + productId));
             detailOrder.setProduct(product);
+
+            if (product.getAvailable() > 0) {
+                Integer newAvailable = product.getAvailable() - detailOrder.getQuantity();
+                product.setAvailable(newAvailable);
+                productRepository.save(product);
+            }
         }
 
         for (UserOrder userOrder : order.getUserOrders()) {
