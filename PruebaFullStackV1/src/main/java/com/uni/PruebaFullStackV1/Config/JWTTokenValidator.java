@@ -34,7 +34,6 @@ public class JWTTokenValidator extends OncePerRequestFilter {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (token != null) {
             token = token.substring(7);
-
             DecodedJWT decodedJWT = jwtUtils.validateToken(token);
 
             String username = jwtUtils.extractUsername(decodedJWT);

@@ -65,7 +65,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
                 authorities);
     }
 
-    public AuthResponse logingUser(AuthLoginRequest authLoginRequest){
+    public AuthResponse loginUser(AuthLoginRequest authLoginRequest){
         String username = authLoginRequest.username();
         String password = authLoginRequest.password();
         Authentication auth = this.authenticate(username, password);
