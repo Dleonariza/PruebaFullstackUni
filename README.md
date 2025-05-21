@@ -1,4 +1,4 @@
-# 🛒 PruebaFullstackUni - Backend de Sistema de Adquisición de Productos
+# 🛒 Backend de Sistema de Adquisición de Productos
 
 Este proyecto representa el backend de un sistema de adquisición de productos mediante pedidos, desarrollado como parte de mi portafolio profesional. 
 Implementado con Java y Spring Boot, el sistema ofrece autenticación segura utilizando JWT, gestión de usuarios y operaciones CRUD para usuarios, productos y pedidos.
